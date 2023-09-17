@@ -5,8 +5,10 @@ import { useState, useEffect } from "react";
 function useImageList(ID){
 
     const [imageList, setImageList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     async function downloadData(){
+        setIsLoading(true);
         if(ID){
             const response = await axios.get(`https://api.slingacademy.com/v1/sample-data/photos/${ID}`);
             setImageList(response.data.photo);
@@ -17,6 +19,7 @@ function useImageList(ID){
             setImageList(response.data.photos);
             // console.log(response.data.photos);
         }
+        setIsLoading(false);
     }
 
 
@@ -24,7 +27,7 @@ function useImageList(ID){
         downloadData();
     }, []);
 
-    return { imageList, setImageList};
+    return { imageList, isLoading };
 }
 
 export default useImageList;

@@ -7,10 +7,13 @@ import './ImageDetails.css'
 
 function ImageDetails(){
     const {id} = useParams();
-    const { imageList, setImageList } = useImageList(id);
+    const { imageList, isLoading } = useImageList(id);
 
     return(
         <div className="container">
+            {
+                isLoading && <h1 style={{color:"white"}}>Loading...</h1>
+            }
             <img className="img" src={imageList.url} />
             <div className="text">
                 <h1 className="title">{imageList.title}</h1>

@@ -5,11 +5,14 @@ import './ImageGrid.css'
 
 function ImageGrid(){
 
-    const { imageList, setImageList } = useImageList();
+    const { imageList, isLoading } = useImageList();
 
     return (
         <>
             <div className="image-grid">
+                {
+                    isLoading && <h1>Loading...</h1>
+                }
                 {imageList.map((imageData) => {
                     return (
                         <ImageCard key={imageData.id} image={imageData.url} id={imageData.id} data={imageData} />
